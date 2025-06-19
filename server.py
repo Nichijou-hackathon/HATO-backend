@@ -25,16 +25,18 @@ def gemini_prompt(s: str):
     return r
 
 # test
-gemini_prompt("米津玄師/Lemon")
+# gemini_prompt("米津玄師/Lemon")
 
 from flask import Flask, request, jsonify
+import json
 app = Flask(__name__)
 
 @app.route("/process", methods=["POST"])
 def process_data():
     data = request.get_json()
-    music_name = data["title"]
-    artist_name = data["artist"]
+    data_dict = json.loads(data)
+    music_name = data_dict["title"]
+    artist_name = data_dict["artist"]
     s = music_name + '/' + artist_name
     result = gemini_prompt(s)
     return jsonify({"result": result})

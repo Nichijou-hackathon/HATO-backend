@@ -9,7 +9,7 @@ def process_data():
     artist_name = data["artist"]
     s = music_name + '/' + artist_name
     result = gemini_prompt(s)
-    return jsonify(result)
+    return result
 
 if __name__ == "__main__":
     app.run(port=5000)
